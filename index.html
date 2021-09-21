@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <script src="/index.js" defer></script>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <article>
+        <form action="" id="form">
+            <div class="space-between-lines">
+                <label for="Nombre">Name</label>
+                <input type="text" name="Nombre" id="username" class="float-left">
+            </div>
+            <div class="space-between-lines">
+                <label for="Apellido">Surname</label>
+                <input type="text" name="Apellido" id="surname">
+            </div>
+            <div class="space-between-lines">
+                <label for="Correo">Email</label>
+                <input type="text" name="Correo" id="email">
+            </div>
+            <div class="space-between-lines">
+                <label for="Mensaje">Message</label>
+                <textarea name="Mensaje" id="message" cols="30" rows="10" maxlength="500" ></textarea>
+            </div>
+            <div class="space-between-lines">
+                <button id="submit">Submit</button>
+                <p id="character-counter">0/500</p>
+            </div>
+            <div class="space-between-lines">
+                <p id="feedback"></p>
+            </div>
+            
+        </form>
+
+    </article>
+</body>
+</html>
