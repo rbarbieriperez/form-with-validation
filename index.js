@@ -6,6 +6,7 @@ const _FIELDS_ = [
     document.getElementById("username"),
     document.getElementById("surname"),
     document.getElementById("email"),
+    document.getElementById("file"),
     document.getElementById("message")
 ];
 const _FEEDBACK_ = document.getElementById("feedback");
@@ -16,7 +17,7 @@ var message= "";
 /*EVENTS*/
 _FORM_.addEventListener("submit", (e)=>{
 
-    if(CheckIfNoEmptyEntries(_FIELDS_) && UsernameFormatChecker(_FIELDS_[0].value) && SurnameFormatChecker(_FIELDS_[1].value) && EmailFormatChecker(_FIELDS_[2].value) && MessageFormatChecker(_FIELDS_[3].value)){
+    if(CheckIfNoEmptyEntries(_FIELDS_) && UsernameFormatChecker(_FIELDS_[0].value) && SurnameFormatChecker(_FIELDS_[1].value) && EmailFormatChecker(_FIELDS_[2].value) && CheckIfThereIsImage(_FIELDS_[3]) && MessageFormatChecker(_FIELDS_[4].value)){
         alert("Todos los datos fueron validados correctamente, enviamos!");
     } else {
         e.preventDefault();
@@ -24,8 +25,8 @@ _FORM_.addEventListener("submit", (e)=>{
     
 });
 
-_FIELDS_[3].addEventListener("keydown", ()=> {
-    showTextSize(_FIELDS_[3].value);
+_FIELDS_[4].addEventListener("keydown", ()=> {
+    showTextSize(_FIELDS_[4].value);
 });
 
 /*FUNCTIONS*/
@@ -84,6 +85,16 @@ function EmailFormatChecker (correo){
         return false;
     }
 }
+
+function CheckIfThereIsImage(input){
+    if (input.files.length > 0){
+        return true;
+    } else {
+        FeedbackContent("Debe haber una imágen seleccionada");
+        return false;
+    }
+}
+
 
 function MessageFormatChecker(mensaje){
     if (mensaje.length > 0) {
