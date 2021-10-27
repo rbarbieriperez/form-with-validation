@@ -2,13 +2,14 @@
 
 /*VARIABLES AND CONSTANTS*/
 const _FORM_ = document.getElementById("form");
+
 const _FIELDS_ = [
-    document.getElementById("username"),
-    document.getElementById("surname"),
-    document.getElementById("email"),
-    document.getElementById("file"),
-    document.getElementById("message")
-];
+    [document.getElementById("username"), UsernameFormatChecker],
+    [document.getElementById("surname"), SurnameFormatChecker],
+    [document.getElementById("email"), EmailFormatChecker],
+    [document.getElementById("file"), CheckIfThereIsImage],
+    [document.getElementById("message"), MessageFormatChecker]
+]
 const _FEEDBACK_ = document.getElementById("feedback");
 const _COUNTER_ = document.getElementById("character-counter");
 var message= "";
@@ -17,8 +18,9 @@ var message= "";
 /*EVENTS*/
 _FORM_.addEventListener("submit", (e)=>{
 
-    if(CheckIfNoEmptyEntries(_FIELDS_) && UsernameFormatChecker(_FIELDS_[0].value) && SurnameFormatChecker(_FIELDS_[1].value) && EmailFormatChecker(_FIELDS_[2].value) && CheckIfThereIsImage(_FIELDS_[3]) && MessageFormatChecker(_FIELDS_[4].value)){
+    if(ValidationFlow(_FIELDS_)){
         alert("Todos los datos fueron validados correctamente, enviamos!");
+        location.reload();
     } else {
         e.preventDefault();
     }
@@ -30,16 +32,25 @@ _FIELDS_[4].addEventListener("keydown", ()=> {
 });
 
 /*FUNCTIONS*/
-function CheckIfNoEmptyEntries (value){
-    for (let i = 0; i < value.length; i++){
-        if (value[i].value.length === 0){
-            FeedbackContent("No puede haber campos vacíos");
-            return false;
-        } else {
-            return true;
+function ValidationFlow(values){
+    let isValid = true;
+    for (let field of values){
+        const [fieldValue, validationFunction] = field;
+        if (! validationFunction(fieldValue.value)) {    
+            isValid  = false;
+            return isValid;
         }
     }
-   
+    return isValid;
+}
+
+function CheckIfNoEmptyEntries (value){
+    if (value.length === 0){
+        FeedbackContent("No puede haber campos vacíos");
+        return false;
+    } else {
+        return true;
+    }   
     
 }
 
@@ -58,20 +69,24 @@ function OnlyAllowLetters(cadena){
 }
 
 function UsernameFormatChecker(nombre){
-    if(OnlyAllowLetters(nombre)){
-        return true;
-    } else {
-        FeedbackContent("El campo Nombre solo admite caracteres de texto");
-        return false;
+    if (CheckIfNoEmptyEntries(nombre)) {
+        if(OnlyAllowLetters(nombre)){
+            return true;
+        } else {
+            FeedbackContent("El campo Nombre solo admite caracteres de texto");
+            return false;
+        }
     }
 }
 
 function SurnameFormatChecker(apellido){
-    if (OnlyAllowLetters(apellido)){
-        return true;
-    } else {
-        FeedbackContent("El campo Apellidos solo admite caracteres de texto");
-        return false;
+    if (CheckIfNoEmptyEntries(apellido)){
+        if (OnlyAllowLetters(apellido)){
+            return true;
+        } else {
+            FeedbackContent("El campo Apellidos solo admite caracteres de texto");
+            return false;
+        }     
     }
 }
 function EmailFormatChecker (correo){   
@@ -87,7 +102,7 @@ function EmailFormatChecker (correo){
 }
 
 function CheckIfThereIsImage(input){
-    if (input.files.length > 0){
+    if (input.length > 0){
         return true;
     } else {
         FeedbackContent("Debe haber una imágen seleccionada");
