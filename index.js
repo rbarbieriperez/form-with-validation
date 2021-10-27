@@ -33,7 +33,7 @@ _FIELDS_[4].addEventListener("keydown", ()=> {
 
 /*FUNCTIONS*/
 function ValidationFlow(values){
-    let isValid = true;
+    let isValid = true; 
     for (let field of values){
         const [fieldValue, validationFunction] = field;
         if (! validationFunction(fieldValue.value)) {    
