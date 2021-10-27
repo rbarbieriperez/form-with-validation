@@ -11,33 +11,18 @@
 <body>
     <article>
         <form action="" id="form" enctype="multipart/form-data">
-            <div class="space-between-lines">
-                <label for="nombre">Name</label>
-                <input type="text" name="nombre" id="username" class="float-left">
-            </div>
-            <div class="space-between-lines">
-                <label for="apellido">Surname</label>
-                <input type="text" name="apellido" id="surname">
-            </div>
-            <div class="space-between-lines">
-                <label for="correo">Email</label>
-                <input type="text" name="correo" id="email">
-            </div>
-            <div class="space-between-lines">
-                <input type="file" name="archivo" id="file" accept=".jpg,.png,.jpeg">
-            </div>
-            <div class="space-between-lines">
-                <label for="mensaje">Message</label>
-                <textarea name="mensaje" id="message" cols="30" rows="10" maxlength="500" ></textarea>
-            </div>
-            <div class="space-between-lines">
-                <button id="submit">Submit</button>
-                <p id="character-counter">0/500</p>
-            </div>
-            <div class="space-between-lines">
-                <p id="feedback"></p>
-            </div>
-            
+            <label for="nombre" class="column-left">Name</label>
+            <input type="text" name="nombre" id="username" class="column-right"> <br>
+            <label for="apellido" class="column-left">Surname</label>
+            <input type="text" name="apellido" id="surname" class="column-right"> <br>
+            <label for="correo" class="column-left">Email</label>
+            <input type="text" name="correo" id="email" class="column-right"> <br>
+            <input type="file" name="archivo" id="file" accept=".jpg,.png,.jpeg" class="column-right"> <br>
+            <label for="mensaje" class="column-left" id="lbl_message">Message</label> 
+            <textarea name="mensaje" id="message" cols="30" rows="10" maxlength="500" class="column-right"></textarea><br>
+            <button id="submit">Submit</button>
+            <p id="character-counter">0/500</p> <br>
+            <p id="feedback"></p>
         </form>
 
     </article>
