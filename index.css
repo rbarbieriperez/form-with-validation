@@ -5,6 +5,8 @@ body {
 
 .column-left {
     float:left;
+    width: 5%;
+    margin-left: 3%;
 }
 .column-right{
     width:40%;
